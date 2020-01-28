@@ -1,0 +1,23 @@
+package ru.spbau.smirnov.cli.executor.commands
+
+import ru.spbau.smirnov.cli.executor.Streams
+import java.io.DataOutputStream
+import java.io.IOException
+
+/**
+ *  Echo command.
+ *
+ *  Ignores `streams.inputStream`. Prints all arguments listed in `arguments` splitted with space
+ */
+class Echo(arguments: List<String>) : Executable(arguments) {
+    override fun execute(streams: Streams): Int {
+        try {
+            DataOutputStream(streams.outputStream)
+                .writeBytes(arguments.joinToString(separator = " ") + "\n")
+        } catch (e: IOException) {
+            streams.errorStream.println("Error in echo\n${e.message}")
+            return 1
+        }
+        return 0
+    }
+}
