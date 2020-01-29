@@ -4,9 +4,7 @@ import ru.spbau.smirnov.cli.executor.commands.Executable
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
-/**
- * Class for executing operations
- */
+/** Class for executing operations */
 object Executor {
     /**
      * Executes operation (set of commands, connected with pipe).

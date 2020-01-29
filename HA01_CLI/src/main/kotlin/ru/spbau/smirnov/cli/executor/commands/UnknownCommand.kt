@@ -1,10 +1,43 @@
 package ru.spbau.smirnov.cli.executor.commands
 
+import ru.spbau.smirnov.cli.Environment
 import ru.spbau.smirnov.cli.executor.Streams
+import java.io.IOException
 
-class UnknownCommand(private val commandName: String, arguments: List<String>) : Executable(arguments) {
+/**
+ * Executes not built-in command
+ *
+ * Runs new process with environment from shell. Doesn't change environment after execution.
+ * I.e. if `cd` command was called inside, in a shell it will not be seen
+ */
+class UnknownCommand(
+    private val environment: Environment,
+    private val commandName: String,
+    arguments: List<String>
+) : Executable(arguments) {
     override fun execute(streams: Streams): Int {
+        try {
+            val process = buildProcess()
+            process.outputStream.write(streams.inputStream.readAllBytes())
+            process.waitFor()
+            streams.outputStream.write(process.inputStream.readAllBytes())
+            streams.errorStream.write(process.errorStream.readAllBytes())
+            return process.exitValue()
+        } catch (e: IOException) {
+            streams.errorStream.println(e.message)
+            return 1
+        }
+    }
 
-        return 0
+    private fun buildProcess(): Process {
+        val processBuilder = ProcessBuilder(
+            mutableListOf(commandName).apply {
+                addAll(arguments)
+            }
+        )
+        val processEnvironment = processBuilder.environment()
+        processEnvironment.clear()
+        processEnvironment.putAll(environment.variableToValue)
+        return processBuilder.start()
     }
 }

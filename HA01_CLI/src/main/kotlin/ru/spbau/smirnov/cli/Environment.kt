@@ -1,22 +1,20 @@
 package ru.spbau.smirnov.cli
 
-import java.nio.file.Path
-import java.nio.file.Paths
-
 /**
  * Stores environmental variables and path to current directory
  */
 class Environment {
-    private val variableToValue = System.getenv()
-    /** Stores path to current directory */
-    var currentDirectory: Path
-        get(): Path {
-           return Paths.get("")
-        }
-        set(path: Path) {
+    /**
+     * Environmental variables.
+     *
+     * It is not private because on executing unknown command we have to put all environmental
+     * variables to a new process
+     */
+    val variableToValue: MutableMap<String, String> = System.getenv()
 
-        }
-
+    /** Returns current directory as a string */
+    val currentDirectory: String
+        get() = getVariableValue("PWD")
 
     /**
      * Assigns `value` to `variable`.

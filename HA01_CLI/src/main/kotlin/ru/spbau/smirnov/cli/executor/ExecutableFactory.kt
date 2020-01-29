@@ -19,7 +19,7 @@ class ExecutableFactory(private val environment: Environment, private val shell:
             "exit" -> Exit(shell, arguments)
             "cat"  -> Cat(arguments)
             "wc"   -> Wc(arguments)
-            else   -> UnknownCommand(commandName, arguments)
+            else   -> UnknownCommand(environment, commandName, arguments)
         }
     }
 }

@@ -19,8 +19,7 @@ class UsualState : StateMachineVertex {
     }
 }
 
-abstract class AnyNameParsing(protected val writtenSymbols: StringBuilder) :
-    StateMachineVertex {
+abstract class AnyNameParsing(protected val writtenSymbols: StringBuilder) : StateMachineVertex {
     protected val badSymbols = listOf(' ', '\t', '\n', '\r', '\'', '"', '|', '=')
 
     protected fun alreadyRead(list: MutableList<Token>) {
