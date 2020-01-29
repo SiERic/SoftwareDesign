@@ -7,10 +7,16 @@ import java.nio.file.Paths
  * Stores environmental variables and path to current directory
  */
 class Environment {
-    private val variableToValue = mutableMapOf<String, String>()
+    private val variableToValue = System.getenv()
     /** Stores path to current directory */
-    var currentDirectory: Path = Paths.get("")
-        private set
+    var currentDirectory: Path
+        get(): Path {
+           return Paths.get("")
+        }
+        set(path: Path) {
+
+        }
+
 
     /**
      * Assigns `value` to `variable`.
