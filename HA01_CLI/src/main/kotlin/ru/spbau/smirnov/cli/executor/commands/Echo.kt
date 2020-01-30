@@ -20,4 +20,16 @@ class Echo(arguments: List<String>) : Executable(arguments) {
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Echo) {
+            return false
+        }
+
+        return arguments == other.arguments
+    }
 }

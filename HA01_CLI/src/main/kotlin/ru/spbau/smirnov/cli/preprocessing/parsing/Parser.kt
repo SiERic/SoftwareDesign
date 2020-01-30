@@ -8,7 +8,16 @@ import ru.spbau.smirnov.cli.executor.ExecutableFactory
 import ru.spbau.smirnov.cli.executor.commands.Executable
 import java.lang.RuntimeException
 
+/** Class for parsing operations over strings preprocessed with `Substitute` */
 class Parser(private val executableFactory: ExecutableFactory) {
+    /**
+     * Parses input using grammar from `CLI.g4`.
+     *
+     * Returns list of executables where commands placed by their execution order
+     * I.e. for 'cat a.txt | wc' list will be `[Cat(a.txt), Wc]`
+     *
+     * @throws ParserException if parsing failed
+     */
     fun parse(input: String): List<Executable> {
         try {
             val lexer = CLILexer(CharStreams.fromString(input))

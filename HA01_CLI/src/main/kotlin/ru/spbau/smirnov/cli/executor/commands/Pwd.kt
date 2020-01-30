@@ -22,4 +22,16 @@ class Pwd(private val environment: Environment, arguments: List<String>) : Execu
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Pwd) {
+            return false
+        }
+
+        return environment === other.environment && arguments == other.arguments
+    }
 }

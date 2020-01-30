@@ -13,4 +13,16 @@ class Exit(private val shell: Shell, arguments: List<String>) : Executable(argum
         shell.finishShell()
         return 0
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Exit) {
+            return false
+        }
+
+        return shell === other.shell && arguments == other.arguments
+    }
 }

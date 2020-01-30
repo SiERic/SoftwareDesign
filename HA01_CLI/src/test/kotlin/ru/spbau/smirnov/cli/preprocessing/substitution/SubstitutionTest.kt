@@ -120,4 +120,13 @@ internal class SubstitutionTest {
                 assignVariable("x", "ex")
             }).doSubstitution("'\"\$x\"'"))
     }
+
+    @Test
+    fun `Should parse quotes after variable`() {
+        assertEquals("ex'it'", Substitute(
+            Environment().apply {
+                assignVariable("x", "ex")
+            }
+        ).doSubstitution("\$x'it'"))
+    }
 }

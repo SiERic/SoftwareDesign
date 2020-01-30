@@ -1,16 +1,15 @@
 package ru.spbau.smirnov.cli.executor.commands
 
 import org.junit.jupiter.api.Test
-import ru.spbau.smirnov.cli.executor.commands.Wc
 
 class WcTest {
     @Test
     fun `Should count one file`() {
-        val wc = Wc(listOf(TestUtils.resourcesDir + "AnotherFile.txt"))
-        TestUtils.runExecutorTest(
+        val wc = Wc(listOf(CommandTestUtils.resourcesDir + "AnotherFile.txt"))
+        CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "3 4 27 ${TestUtils.resourcesDir}AnotherFile.txt\n",
+            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt\n",
             ""
         )
     }
@@ -18,7 +17,7 @@ class WcTest {
     @Test
     fun `Should read input if no arguments passed`() {
         val wc = Wc(listOf())
-        TestUtils.runExecutorTest(
+        CommandTestUtils.runExecutorTest(
             wc,
             "some input",
             "0 2 10\n",
@@ -28,11 +27,11 @@ class WcTest {
 
     @Test
     fun `Should calculate total on two files`() {
-        val wc = Wc(listOf(TestUtils.resourcesDir + "AnotherFile.txt", TestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
-        TestUtils.runExecutorTest(
+        val wc = Wc(listOf(CommandTestUtils.resourcesDir + "AnotherFile.txt", CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
+        CommandTestUtils.runExecutorTest(
             wc, "some input",
-            """3 4 27 ${TestUtils.resourcesDir}AnotherFile.txt
-            |5 5 24 ${TestUtils.resourcesDir}JustAFileWithSomeContent.txt
+            """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
+            |5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt
             |8 9 51 total
             |""".trimMargin(), ""
         )
@@ -41,7 +40,7 @@ class WcTest {
     @Test
     fun `Should print error if cannot find file`() {
         val wc = Wc(listOf("a"))
-        TestUtils.runExecutorTest(
+        CommandTestUtils.runExecutorTest(
             wc,
             "some input",
             "",

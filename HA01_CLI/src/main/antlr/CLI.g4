@@ -20,12 +20,12 @@ grammar CLI;
 }
 
 operation
-    : SPACE* (commands += command SPACE* ('|' SPACE* commands += command SPACE*)*)?
+    : SPACE* (commands += command SPACE* ('|' SPACE* commands += command SPACE*)*)? EOF #setOfCommands
+    | variable=NO_QUOTE_TOKEN SPACE* '=' SPACE* value=token EOF #assignment
     ;
 
 command
-    : commandName=token (SPACE* args += token)* #usualCommand
-    | variable=NO_QUOTE_TOKEN SPACE* '=' SPACE* value=token #assignment
+    : commandName=token (SPACE* args += token)*
     ;
 
 token

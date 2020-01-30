@@ -46,4 +46,16 @@ class UnknownCommand(
         processEnvironment.putAll(environment.variableToValue)
         return processBuilder.start()
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is UnknownCommand) {
+            return false
+        }
+
+        return environment === other.environment && commandName == other.commandName && arguments == other.arguments
+    }
 }

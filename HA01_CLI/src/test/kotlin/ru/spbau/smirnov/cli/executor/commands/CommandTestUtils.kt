@@ -7,7 +7,7 @@ import ru.spbau.smirnov.cli.executor.commands.Executable
 import java.io.*
 
 
-object TestUtils {
+object CommandTestUtils {
     val resourcesDir = "src" + File.separator + "test" + File.separator + "resources" + File.separator
 
     fun runExecutorTest(command: Executable,

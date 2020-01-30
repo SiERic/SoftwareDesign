@@ -1,13 +1,12 @@
 package ru.spbau.smirnov.cli.executor.commands
 
 import org.junit.jupiter.api.Test
-import ru.spbau.smirnov.cli.executor.commands.Echo
 
 class EchoTest {
     @Test
     fun `Should print newline if no arguments passed`() {
         val echo = Echo(listOf())
-        TestUtils.runExecutorTest(
+        CommandTestUtils.runExecutorTest(
             echo,
             "some input",
             "\n",
@@ -18,7 +17,7 @@ class EchoTest {
     @Test
     fun `Should print one argument`() {
         val echo = Echo(listOf("argument"))
-        TestUtils.runExecutorTest(
+        CommandTestUtils.runExecutorTest(
             echo,
             "some input",
             "argument\n",
@@ -29,7 +28,7 @@ class EchoTest {
     @Test
     fun `Should print some arguments separated with spaces`() {
         val echo = Echo(listOf("argument1", "argument2"))
-        TestUtils.runExecutorTest(
+        CommandTestUtils.runExecutorTest(
             echo,
             "some input",
             "argument1 argument2\n",

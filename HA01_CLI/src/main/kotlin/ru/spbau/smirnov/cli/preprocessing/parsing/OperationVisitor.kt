@@ -20,7 +20,8 @@ class OperationVisitor(
         return null
     }
 
-    override fun visitOperation(ctx: CLIParser.OperationContext): String? {
+    override fun visitSetOfCommands(ctx: CLIParser.SetOfCommandsContext): String? {
+        println("Visited ${ctx.text}")
         for (command in ctx.commands) {
             command.accept(this)
         }
@@ -28,7 +29,7 @@ class OperationVisitor(
         return null
     }
 
-    override fun visitUsualCommand(ctx: CLIParser.UsualCommandContext): String? {
+    override fun visitCommand(ctx: CLIParser.CommandContext): String? {
         val arguments = mutableListOf<String>()
         for (argument in ctx.args) {
             val argumentValue = argument.accept(this)!!

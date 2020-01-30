@@ -59,4 +59,16 @@ class Wc(arguments: List<String>) : Executable(arguments) {
         val words = string.split(' ', '\t', '\n').count { it.isNotEmpty() }
         return Triple(newlines, words, bytes.size)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Wc) {
+            return false
+        }
+
+        return arguments == other.arguments
+    }
 }

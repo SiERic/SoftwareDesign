@@ -15,4 +15,16 @@ class Assignment(private val environment: Environment, arguments: List<String>) 
         environment.assignVariable(arguments[0], arguments[1])
         return 0
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Assignment) {
+            return false
+        }
+
+        return environment === other.environment && arguments == other.arguments
+    }
 }
