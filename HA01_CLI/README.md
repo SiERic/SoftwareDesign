@@ -1,12 +1,12 @@
-Run:
+### Run ###
 
 `./gradlew run --console=plain`
 
-Architecture:
+### Architecture ###
 
 https://drive.google.com/file/d/1hQdNZnXyPr_hBnZ--pvhTXHbayCeAU9l/view?usp=sharing
 
-Описание архитектуры:
+### Описание архитектуры ###
 
 За подстановку переменных окружения отвечает блок `Substitute`, реализованный в виде конечного автомата. 
 
