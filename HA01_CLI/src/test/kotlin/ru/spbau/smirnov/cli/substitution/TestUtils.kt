@@ -23,9 +23,8 @@ object TestUtils {
         command.execute(streams)
 
         assertEquals(expectedOutput, String(processOutputStream.toByteArray()))
-        if (expectedErrors.isNotEmpty()) {
-            // we cannot compare them because of languages, systems,...
-            assertTrue(String(processErrorStream.toByteArray()).isNotEmpty())
-        }
+
+        // we cannot compare them because of languages, systems,...
+        assertTrue(String(processErrorStream.toByteArray()).isNotEmpty() == expectedErrors.isNotEmpty())
     }
 }

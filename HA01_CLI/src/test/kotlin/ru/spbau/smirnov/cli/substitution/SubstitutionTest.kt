@@ -78,18 +78,21 @@ internal class SubstitutionTest {
     @Test
     fun `Should throw on bad input`() {
         assertThrows(SubstitutionParserException::class.java) {
-            Substitute(Environment())
-                .doSubstitution("\"bar")
+            Substitute(
+                Environment()
+            ).doSubstitution("\"bar")
         }
 
         assertThrows(SubstitutionParserException::class.java) {
-            Substitute(Environment())
-                .doSubstitution("'bar")
+            Substitute(
+                Environment()
+            ).doSubstitution("'bar")
         }
 
         assertThrows(SubstitutionParserException::class.java) {
-            Substitute(Environment())
-                .doSubstitution("\"\$FOO")
+            Substitute(
+                Environment()
+            ).doSubstitution("\"\$FOO")
         }
     }
 

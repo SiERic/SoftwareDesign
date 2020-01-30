@@ -18,7 +18,13 @@ class UnknownCommand(
     override fun execute(streams: Streams): Int {
         try {
             val process = buildProcess()
-            process.outputStream.write(streams.inputStream.readAllBytes())
+            try {
+                process.outputStream.write(streams.inputStream.readAllBytes())
+                process.outputStream.close()
+            } catch (ignored: IOException) {
+                // if process output stream is closed, it started work with arguments
+                // and no input stream will be used
+            }
             process.waitFor()
             streams.outputStream.write(process.inputStream.readAllBytes())
             streams.errorStream.write(process.errorStream.readAllBytes())
