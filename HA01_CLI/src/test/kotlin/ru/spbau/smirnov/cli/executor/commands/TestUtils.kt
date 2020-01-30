@@ -1,4 +1,4 @@
-package ru.spbau.smirnov.cli.substitution
+package ru.spbau.smirnov.cli.executor.commands
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -24,7 +24,8 @@ object TestUtils {
 
         assertEquals(expectedOutput, String(processOutputStream.toByteArray()))
 
-        // we cannot compare them because of languages, systems,...
+        // we cannot compare them because of languages, systems, ...
+        // so just check that error exists or not
         assertTrue(String(processErrorStream.toByteArray()).isNotEmpty() == expectedErrors.isNotEmpty())
     }
 }

@@ -1,7 +1,8 @@
-package ru.spbau.smirnov.cli.substitution
+package ru.spbau.smirnov.cli.executor.commands
 
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
+import ru.spbau.smirnov.cli.executor.commands.TestUtils
 import ru.spbau.smirnov.cli.executor.commands.UnknownCommand
 
 class UnknownCommandTest {

@@ -1,4 +1,4 @@
-package ru.spbau.smirnov.cli.substitution
+package ru.spbau.smirnov.cli.preprocessing.substitution
 
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test

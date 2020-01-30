@@ -10,7 +10,7 @@ class Environment {
      * It is not private because on executing unknown command we have to put all environmental
      * variables to a new process
      */
-    val variableToValue: MutableMap<String, String> = System.getenv()
+    val variableToValue = mutableMapOf<String, String>().apply { putAll(System.getenv()) }
 
     /** Returns current directory as a string */
     val currentDirectory: String
