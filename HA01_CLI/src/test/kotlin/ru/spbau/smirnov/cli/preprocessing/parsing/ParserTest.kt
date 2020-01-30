@@ -4,13 +4,14 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
 import ru.spbau.smirnov.cli.Shell
-import ru.spbau.smirnov.cli.executor.ExecutableFactory
-import ru.spbau.smirnov.cli.executor.commands.*
+import ru.spbau.smirnov.cli.commands.ExecutableFactory
+import ru.spbau.smirnov.cli.commands.*
 
 class ParserTest {
 
     private val environment = Environment()
-    private val executableFactory = ExecutableFactory(environment, Shell)
+    private val shell = Shell()
+    private val executableFactory = ExecutableFactory(environment, shell)
     private val parser = Parser(executableFactory)
 
     @Test
@@ -80,7 +81,7 @@ class ParserTest {
     @Test
     fun `Should parse something with stupid placed spaces`() {
         val wc = Wc(listOf("parameter1", "parameter2"))
-        val exit = Exit(Shell, listOf())
+        val exit = Exit(shell, listOf())
         assertEquals(listOf(wc, exit), parser.parse("     wc   parameter1     parameter2|    exit    "))
     }
 

@@ -1,6 +1,6 @@
 package ru.spbau.smirnov.cli.executor
 
-import ru.spbau.smirnov.cli.executor.commands.Executable
+import ru.spbau.smirnov.cli.commands.Executable
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 

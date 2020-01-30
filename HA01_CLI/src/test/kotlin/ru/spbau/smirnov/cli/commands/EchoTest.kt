@@ -1,4 +1,4 @@
-package ru.spbau.smirnov.cli.executor.commands
+package ru.spbau.smirnov.cli.commands
 
 import org.junit.jupiter.api.Test
 

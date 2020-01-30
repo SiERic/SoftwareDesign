@@ -1,5 +1,7 @@
 package ru.spbau.smirnov.cli
 
+import java.nio.file.Paths
+
 /**
  * Stores environmental variables and path to current directory
  */
@@ -13,8 +15,7 @@ class Environment {
     val variableToValue = mutableMapOf<String, String>().apply { putAll(System.getenv()) }
 
     /** Returns current directory as a string */
-    val currentDirectory: String
-        get() = getVariableValue("PWD")
+    val currentDirectory: String = Paths.get("").toAbsolutePath().toString()
 
     /**
      * Assigns `value` to `variable`.

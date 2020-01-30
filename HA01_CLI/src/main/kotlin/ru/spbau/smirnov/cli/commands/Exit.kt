@@ -1,4 +1,4 @@
-package ru.spbau.smirnov.cli.executor.commands
+package ru.spbau.smirnov.cli.commands
 
 import ru.spbau.smirnov.cli.Shell
 import ru.spbau.smirnov.cli.executor.Streams

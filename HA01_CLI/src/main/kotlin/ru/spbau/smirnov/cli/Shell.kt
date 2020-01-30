@@ -1,9 +1,9 @@
 package ru.spbau.smirnov.cli
 
-import ru.spbau.smirnov.cli.executor.ExecutableFactory
+import ru.spbau.smirnov.cli.commands.ExecutableFactory
 import ru.spbau.smirnov.cli.executor.Executor
 import ru.spbau.smirnov.cli.executor.Streams
-import ru.spbau.smirnov.cli.executor.commands.Executable
+import ru.spbau.smirnov.cli.commands.Executable
 import ru.spbau.smirnov.cli.preprocessing.parsing.Parser
 import ru.spbau.smirnov.cli.preprocessing.parsing.ParserException
 import ru.spbau.smirnov.cli.preprocessing.substitution.Substitute
@@ -13,11 +13,12 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.io.PrintStream
 
-/** Object for running shell */
-object Shell {
+/** Class for running shell */
+class Shell {
     private var finish = false
     private val environment = Environment()
-    private val executableFactory = ExecutableFactory(environment, this)
+    private val executableFactory =
+        ExecutableFactory(environment, this)
     private val substitute = Substitute(environment)
     private val parser = Parser(executableFactory)
     private var lastReturnCode = 0
@@ -65,5 +66,5 @@ object Shell {
 
 /** Runs shell as console application */
 fun main(args: Array<String>) {
-    Shell.run(System.`in`, System.out, System.err)
+    Shell().run(System.`in`, System.out, System.err)
 }

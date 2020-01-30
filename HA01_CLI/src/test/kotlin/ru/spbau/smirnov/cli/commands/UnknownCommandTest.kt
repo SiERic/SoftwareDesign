@@ -1,4 +1,4 @@
-package ru.spbau.smirnov.cli.executor.commands
+package ru.spbau.smirnov.cli.commands
 
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
@@ -24,5 +24,4 @@ class UnknownCommandTest {
         val command = UnknownCommand(Environment(), "someUnknownCommand", listOf())
         CommandTestUtils.runExecutorTest(command, "some\ninput\n", "", "some errors")
     }
-
 }

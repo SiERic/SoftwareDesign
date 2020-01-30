@@ -1,8 +1,8 @@
-package ru.spbau.smirnov.cli.executor
+package ru.spbau.smirnov.cli.commands
 
 import ru.spbau.smirnov.cli.Environment
 import ru.spbau.smirnov.cli.Shell
-import ru.spbau.smirnov.cli.executor.commands.*
+import ru.spbau.smirnov.cli.commands.*
 
 /** Factory for creating executable by command name */
 class ExecutableFactory(private val environment: Environment, private val shell: Shell) {

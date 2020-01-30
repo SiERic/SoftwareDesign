@@ -2,8 +2,8 @@ package ru.spbau.smirnov.cli.preprocessing.parsing
 
 import ru.spbau.smirnov.CLIBaseVisitor
 import ru.spbau.smirnov.CLIParser
-import ru.spbau.smirnov.cli.executor.ExecutableFactory
-import ru.spbau.smirnov.cli.executor.commands.Executable
+import ru.spbau.smirnov.cli.commands.ExecutableFactory
+import ru.spbau.smirnov.cli.commands.Executable
 
 /**
  * Visitor for grammar from `CLI.g4`.
@@ -28,7 +28,6 @@ class OperationVisitor(
 
     /** Visits set of command in their execution order */
     override fun visitSetOfCommands(ctx: CLIParser.SetOfCommandsContext): String? {
-        println("Visited ${ctx.text}")
         for (command in ctx.commands) {
             command.accept(this)
         }

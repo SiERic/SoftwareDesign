@@ -1,9 +1,8 @@
-package ru.spbau.smirnov.cli.executor.commands
+package ru.spbau.smirnov.cli.commands
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import ru.spbau.smirnov.cli.executor.Streams
-import ru.spbau.smirnov.cli.executor.commands.Executable
 import java.io.*
 
 

@@ -4,8 +4,8 @@ import org.antlr.v4.runtime.CharStreams
 import org.antlr.v4.runtime.CommonTokenStream
 import ru.spbau.smirnov.CLILexer
 import ru.spbau.smirnov.CLIParser
-import ru.spbau.smirnov.cli.executor.ExecutableFactory
-import ru.spbau.smirnov.cli.executor.commands.Executable
+import ru.spbau.smirnov.cli.commands.ExecutableFactory
+import ru.spbau.smirnov.cli.commands.Executable
 import java.lang.RuntimeException
 
 /** Class for parsing operations over strings preprocessed with `Substitute` */
