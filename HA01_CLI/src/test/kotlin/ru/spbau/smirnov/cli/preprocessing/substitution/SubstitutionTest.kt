@@ -3,8 +3,6 @@ package ru.spbau.smirnov.cli.preprocessing.substitution
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
-import ru.spbau.smirnov.cli.preprocessing.substitution.Substitute
-import ru.spbau.smirnov.cli.preprocessing.substitution.SubstitutionParserException
 
 internal class SubstitutionTest {
     @Test
