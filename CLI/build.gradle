@@ -32,6 +32,8 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter:5.6.0"
     compile "org.antlr:antlr4-runtime:4.7.2"
     antlr "org.antlr:antlr4:4.7.2"
+    // https://mvnrepository.com/artifact/com.beust/jcommander
+    compile group: 'com.beust', name: 'jcommander', version: '1.78'
 }
 
 tasks.test {
