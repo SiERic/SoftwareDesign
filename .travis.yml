@@ -4,5 +4,5 @@ jdk:
 os:
   - linux
 env:
-  - PROJECT_DIR=HA01_CLI
+  - PROJECT_DIR=CLI
 script: cd $PROJECT_DIR && ./gradlew test
