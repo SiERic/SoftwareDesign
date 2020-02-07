@@ -4,11 +4,11 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import java.lang.StringBuilder
 
-class GrepArguments {
+internal class GrepArguments {
 
     /** Case insensitive matching */
     @Parameter(names = ["-i"], description = "Case insensitive matching")
-    var caseInsensitive= false
+    var caseInsensitive = false
 
     /** Only full word matches */
     @Parameter(names = ["-w"], description = "Only full word matches")
@@ -72,5 +72,22 @@ class GrepArguments {
     fun parseFrom(arguments: List<String>) {
         parser.parse(*arguments.toTypedArray())
         afterJCommanderParsing()
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is GrepArguments) {
+            return false
+        }
+
+        return caseInsensitive == other.caseInsensitive &&
+                fullWord == other.fullWord &&
+                outputLines == other.outputLines &&
+                help == other.help &&
+                pattern == other.pattern &&
+                files == other.files
     }
 }

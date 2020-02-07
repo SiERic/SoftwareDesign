@@ -108,4 +108,16 @@ class Grep(arguments: List<String>) : Executable(arguments) {
         grepArguments = GrepArguments()
         grepArguments.parseFrom(arguments)
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+
+        if (other == null || other !is Grep) {
+            return false
+        }
+
+        return arguments == other.arguments
+    }
 }
