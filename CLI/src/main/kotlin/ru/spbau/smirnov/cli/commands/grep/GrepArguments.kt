@@ -4,6 +4,11 @@ import com.beust.jcommander.JCommander
 import com.beust.jcommander.Parameter
 import java.lang.StringBuilder
 
+/**
+ * Arguments for grep command.
+ *
+ * Parsed with JCommander
+ */
 internal class GrepArguments {
 
     /** Case insensitive matching */
@@ -30,6 +35,7 @@ internal class GrepArguments {
         .addObject(this)
         .build()
 
+    /** Message with usage options */
     val usage: String
 
     /** Pattern to search by */
@@ -69,6 +75,13 @@ internal class GrepArguments {
         files = unparsed.subList(1, unparsed.size)
     }
 
+    /**
+     * Parses arguments listed in `arguments` to this class and organizes unparsed arguments
+     *
+     * @throws GrepParserException if pattern is not listed in arguments
+     * @throws GrepParserException if unexpected key is listed as argument
+     * @throws GrepParserException if number of lines that should be printed is negative
+     */
     fun parseFrom(arguments: List<String>) {
         parser.parse(*arguments.toTypedArray())
         afterJCommanderParsing()

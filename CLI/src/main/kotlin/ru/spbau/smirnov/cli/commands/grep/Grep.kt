@@ -4,8 +4,18 @@ import ru.spbau.smirnov.cli.executor.Streams
 import java.io.*
 import java.util.regex.Pattern
 
+/**
+ * Grep command.
+ *
+ * Supports -i (case insensitive), -A n (write n lines after matching) -w (only full word matches)
+ * For more information run with argument `--help`
+ * If no files are listed in `arguments`, uses `streams.inputStream` as input
+ */
 class Grep(arguments: List<String>) : Executable(arguments) {
 
+    // This parameters are not initialized in constructor, because, I think,
+    // error while parsing should be grep runtime error, but not parser error
+    // (the same way it is done in bash)
     private lateinit var grepArguments: GrepArguments
     private lateinit var pattern: Pattern
 

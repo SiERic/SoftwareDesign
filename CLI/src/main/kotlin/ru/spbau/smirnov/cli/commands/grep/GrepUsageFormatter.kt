@@ -4,6 +4,11 @@ import com.beust.jcommander.DefaultUsageFormatter
 import com.beust.jcommander.JCommander
 
 
+/**
+ * Class that overrides only `appendMainLine` method from `DefaultUsageFormatter`.
+ *
+ * Prints options of grep command and a short description
+ */
 internal class GrepUsageFormatter(
     private val commander: JCommander
 ) : DefaultUsageFormatter(commander) {
