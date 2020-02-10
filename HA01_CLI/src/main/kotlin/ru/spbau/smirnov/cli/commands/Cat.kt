@@ -16,7 +16,7 @@ class Cat(arguments: List<String>) : Executable(arguments) {
             try {
                 output.writeBytes(String(DataInputStream(streams.inputStream).readBytes()))
             } catch (e: IOException) {
-                streams.errorStream.println("Error in cat while reading from inputStream!\n${e.message}")
+                streams.errorStream.println("Error in cat while reading from inputStream!${System.lineSeparator()}${e.message}")
                 return 1
             }
         } else {
