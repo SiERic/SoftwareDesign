@@ -19,12 +19,11 @@ class CatTest {
         CommandTestUtils.runExecutorTest(
             cat,
             "",
-            """some
-                |content
-                |is
-                |here
-                |42
-                |""".trimMargin(),
+            "some" + System.lineSeparator() +
+                "content" + System.lineSeparator() +
+                "is" + System.lineSeparator() +
+                "here" + System.lineSeparator() +
+                "42" + System.lineSeparator(),
             ""
         )
     }
@@ -46,12 +45,11 @@ class CatTest {
         CommandTestUtils.runExecutorTest(
             cat,
             "someInput",
-            """some
-                |content
-                |is
-                |here
-                |42
-                |""".trimMargin(),
+            "some" + System.lineSeparator() +
+                    "content" + System.lineSeparator() +
+                    "is" + System.lineSeparator() +
+                    "here" + System.lineSeparator() +
+                    "42" + System.lineSeparator(),
             ""
         )
     }
@@ -62,15 +60,15 @@ class CatTest {
         CommandTestUtils.runExecutorTest(
             cat,
             "someInput",
-            """some
-              |content
-              |is
-              |here
-              |42
-              |Some
-              |Other awesome
-              |Content
-              |""".trimMargin(), ""
+            "some" + System.lineSeparator() +
+                    "content" + System.lineSeparator() +
+                    "is" + System.lineSeparator() +
+                    "here" + System.lineSeparator() +
+                    "42" + System.lineSeparator() +
+                    "Some" + System.lineSeparator() +
+                    "Other awesome" + System.lineSeparator() +
+                    "Content" + System.lineSeparator(),
+            ""
         )
     }
 
