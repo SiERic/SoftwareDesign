@@ -11,16 +11,13 @@ class UnknownCommandTest {
         )
         CommandTestUtils.runExecutorTest(
             command,
-            """some ignored
-                |input
-            """.trimMargin(),
-            """42
-                |content
-                |here
-                |is
-                |some
-                |
-            """.trimMargin(),
+            "some ignored" + System.lineSeparator() +
+                "input" + System.lineSeparator(),
+            "42" + System.lineSeparator() +
+                "content" + System.lineSeparator() +
+                "here" + System.lineSeparator() +
+                "is" + System.lineSeparator() +
+                "some" + System.lineSeparator(),
             ""
         )
     }
@@ -30,14 +27,10 @@ class UnknownCommandTest {
         val command = UnknownCommand(Environment(), "sort", listOf())
         CommandTestUtils.runExecutorTest(
             command,
-            """some
-                |input
-                |
-            """.trimMargin(),
-            """input
-                |some
-                |
-            """.trimMargin(),
+            "some" + System.lineSeparator() +
+                "input" + System.lineSeparator(),
+            "input" + System.lineSeparator() +
+                    "some" + System.lineSeparator(),
             ""
         )
     }
@@ -47,10 +40,8 @@ class UnknownCommandTest {
         val command = UnknownCommand(Environment(), "someUnknownCommand", listOf())
         CommandTestUtils.runExecutorTest(
             command,
-            """some
-                |input
-                |
-            """.trimMargin(),
+            "some" + System.lineSeparator() +
+                    "input" + System.lineSeparator(),
             "",
             "some errors"
         )

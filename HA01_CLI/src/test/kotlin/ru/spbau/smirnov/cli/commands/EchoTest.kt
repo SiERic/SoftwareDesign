@@ -20,9 +20,7 @@ class EchoTest {
         CommandTestUtils.runExecutorTest(
             echo,
             "some input",
-            """argument
-                |
-            """.trimMargin(),
+            "argument" + System.lineSeparator(),
             ""
         )
     }
@@ -33,9 +31,7 @@ class EchoTest {
         CommandTestUtils.runExecutorTest(
             echo,
             "some input",
-            """argument1 argument2
-                |
-            """.trimMargin(),
+            "argument1 argument2" + System.lineSeparator(),
             ""
         )
     }
