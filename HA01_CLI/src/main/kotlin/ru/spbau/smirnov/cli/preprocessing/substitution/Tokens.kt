@@ -3,7 +3,7 @@ package ru.spbau.smirnov.cli.preprocessing.substitution
 import ru.spbau.smirnov.cli.Environment
 
 /** Abstract class to represent tokens in substitution parser */
-abstract class Token(
+sealed class Token(
     /** Token value as an element of input */
     protected val value: String
 ) {
