@@ -15,7 +15,7 @@ class Pwd(private val environment: Environment, arguments: List<String>) : Execu
     override fun execute(streams: Streams): Int {
         try {
             DataOutputStream(streams.outputStream)
-                .writeBytes(environment.currentDirectory + "\n")
+                .writeBytes(environment.currentDirectory + System.lineSeparator())
         } catch(e: IOException) {
             streams.errorStream.println("Error in pwd.${System.lineSeparator()}${e.message}")
             return 1
