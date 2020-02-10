@@ -41,9 +41,7 @@ class UnknownCommand(
                 addAll(arguments)
             }
         )
-        val processEnvironment = processBuilder.environment()
-        processEnvironment.clear()
-        processEnvironment.putAll(environment.variableToValue)
+        environment.passEnvironmentalVariables(processBuilder)
         return processBuilder.start()
     }
 

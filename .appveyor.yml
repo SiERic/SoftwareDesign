@@ -1,0 +1,8 @@
+language: java
+jdk:
+  - openjdk11
+os:
+  - windows
+env:
+  - PROJECT_DIR=HA01_CLI
+script: cd $PROJECT_DIR && ./gradlew test

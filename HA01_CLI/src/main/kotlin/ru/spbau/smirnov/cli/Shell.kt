@@ -17,11 +17,9 @@ import java.io.PrintStream
 class Shell {
     private var finish = false
     private val environment = Environment()
-    private val executableFactory =
-        ExecutableFactory(environment, this)
+    private val executableFactory = ExecutableFactory(environment, this)
     private val substitute = Substitute(environment)
     private val parser = Parser(executableFactory)
-    private var lastReturnCode = 0
 
     /** Sets `finish` flag that means that shall will be closed after execution of current operation */
     fun finishShell() {
@@ -59,7 +57,7 @@ class Shell {
                 continue
             }
 
-            lastReturnCode = Executor.execute(parsedInput, streams)
+            Executor.execute(parsedInput, streams)
         }
     }
 }
