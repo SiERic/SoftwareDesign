@@ -8,6 +8,11 @@ class PwdTest {
     @Test
     fun `Should write path`() {
         val expectedPath = Paths.get("").toAbsolutePath().toString()
-        CommandTestUtils.runExecutorTest(Pwd(Environment(), listOf()), "some useless input", expectedPath + "\n", "")
+        CommandTestUtils.runExecutorTest(
+            Pwd(Environment(), listOf()),
+            "some useless input",
+            expectedPath + System.lineSeparator(),
+            ""
+        )
     }
 }

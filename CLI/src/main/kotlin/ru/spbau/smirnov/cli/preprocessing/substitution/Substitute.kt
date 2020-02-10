@@ -15,7 +15,7 @@ class Substitute(private val environment: Environment) {
      * (i.e. not closed quotes)
      */
     fun doSubstitution(input: String): String {
-        var stateMachine: StateMachineVertex = UsualState()
+        var stateMachine: StateMachineVertex = UsualState
         val tokens = mutableListOf<Token>()
 
         for (symbol in input) {

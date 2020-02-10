@@ -1,15 +1,25 @@
 package ru.spbau.smirnov.cli.commands
 
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import ru.spbau.smirnov.cli.fillFiles
 
 class WcTest {
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
+
     @Test
     fun `Should count one file`() {
         val wc = Wc(listOf(CommandTestUtils.resourcesDir + "AnotherFile.txt"))
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt\n",
+            "3 4 ${24 + 3 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator(),
             ""
         )
     }
@@ -20,7 +30,7 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "0 2 10\n",
+            "0 2 10" + System.lineSeparator(),
             ""
         )
     }
@@ -29,11 +39,12 @@ class WcTest {
     fun `Should calculate total on two files`() {
         val wc = Wc(listOf(CommandTestUtils.resourcesDir + "AnotherFile.txt", CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
         CommandTestUtils.runExecutorTest(
-            wc, "some input",
-            """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
-            |5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt
-            |8 9 51 total
-            |""".trimMargin(), ""
+            wc,
+            "some input",
+            "3 4 ${24 + 3 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator() +
+                "5 5 ${19 + 5 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt" + System.lineSeparator() +
+                "8 9 ${43 + 8 * System.lineSeparator().length} total" + System.lineSeparator(),
+            ""
         )
     }
 

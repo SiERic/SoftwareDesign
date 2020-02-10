@@ -13,9 +13,9 @@ class Echo(arguments: List<String>) : Executable(arguments) {
     override fun execute(streams: Streams): Int {
         try {
             DataOutputStream(streams.outputStream)
-                .writeBytes(arguments.joinToString(separator = " ") + "\n")
+                .writeBytes(arguments.joinToString(separator = " ") + System.lineSeparator())
         } catch (e: IOException) {
-            streams.errorStream.println("Error in echo\n${e.message}")
+            streams.errorStream.println("Error in echo${System.lineSeparator()}${e.message}")
             return 1
         }
         return 0

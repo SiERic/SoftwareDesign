@@ -8,14 +8,20 @@ import java.nio.file.Paths
 class Environment {
     /**
      * Environmental variables.
-     *
-     * It is not private because on executing unknown command we have to put all environmental
-     * variables to a new process
      */
-    val variableToValue = mutableMapOf<String, String>().apply { putAll(System.getenv()) }
+    private val variableToValue = mutableMapOf<String, String>().apply { putAll(System.getenv()) }
 
     /** Returns current directory as a string */
     val currentDirectory: String = Paths.get("").toAbsolutePath().toString()
+
+    /**
+     * Sets environmental variables of a new process to current environmental variables
+     */
+    fun passEnvironmentalVariables(processBuilder: ProcessBuilder) {
+        val processEnvironment = processBuilder.environment()
+        processEnvironment.clear()
+        processEnvironment.putAll(variableToValue)
+    }
 
     /**
      * Assigns `value` to `variable`.

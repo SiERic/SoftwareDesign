@@ -1,6 +1,7 @@
 package ru.spbau.smirnov.cli
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -10,30 +11,66 @@ import java.io.PrintStream
 class ShellTest {
     private val resourcesDir = "src" + File.separator + "test" + File.separator + "resources" + File.separator
 
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
+
     @Test
     fun `Should start and exit shell`() {
-        runShell("exit\n", "> ")
+        runShell(
+            "exit" + System.lineSeparator(),
+            "> "
+        )
     }
 
     @Test
     fun `Should execute simple echo`() {
-        runShell("echo 4 2\nexit\n", "> 4 2\n> ")
+        runShell(
+            "echo 4 2" + System.lineSeparator() +
+                    "exit" + System.lineSeparator(),
+            "> 4 2" + System.lineSeparator() +
+                    "> "
+        )
     }
 
     @Test
     fun `Should store variables`() {
-        runShell("FILE=${resourcesDir}example.txt\ncat \$FILE\nexit\n", "> > Some example text\n> ")
+        runShell(
+            "FILE=${resourcesDir}example.txt" + System.lineSeparator() +
+                    "cat \$FILE" + System.lineSeparator() +
+                    "exit" + System.lineSeparator(),
+            "> > Some example text" + System.lineSeparator() +
+                    "> "
+        )
     }
 
     @Test
     fun `Pipe should work`() {
-        runShell("FILE=${resourcesDir}example.txt\ncat \$FILE | wc\nexit\n", "> > 1 3 18\n> ")
+        runShell(
+            "FILE=${resourcesDir}example.txt" + System.lineSeparator() +
+                    "cat \$FILE | wc" + System.lineSeparator() +
+                    "exit" + System.lineSeparator(),
+            "> > 1 3 ${17 + System.lineSeparator().length}" + System.lineSeparator() +
+                    "> "
+        )
     }
 
     @Test
     fun `Variable as a command should work`() {
-        runShell("x=exit\n\$x", "> > ")
-        runShell("x=ex\ny=it\n\$x\$y", "> > > ")
+        runShell(
+            "x=exit" + System.lineSeparator() +
+                "\$x", "> > "
+        )
+        runShell(
+            "x=ex" + System.lineSeparator() +
+                    "y=it" + System.lineSeparator() +
+                    "\$x\$y",
+            "> > > "
+        )
     }
 
     private fun runShell(input: String, expectedOutput: String) {

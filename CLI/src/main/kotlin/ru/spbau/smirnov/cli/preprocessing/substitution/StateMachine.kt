@@ -5,37 +5,37 @@ package ru.spbau.smirnov.cli.preprocessing.substitution
  *
  * The only thing this machine does is detection of environmental variables usages
  */
-interface StateMachineVertex {
+sealed class StateMachineVertex {
     /**
      * Takes next symbol and returns new machine's state
      * Adds new tokens to `list` if needed
      */
-    fun parseSymbol(symbol: Char, list: MutableList<Token>): StateMachineVertex
+    abstract fun parseSymbol(symbol: Char, list: MutableList<Token>): StateMachineVertex
     /**
      * Shut downs machine.
      * Adds not added tokens to `list`
      *
      * @throws SubstitutionParserException if machine is in a bad state for finishing
      */
-    fun finishParsing(list: MutableList<Token>)
+    abstract fun finishParsing(list: MutableList<Token>)
 }
 
 /** State not inside quotes and not reading variable name */
-class UsualState : StateMachineVertex {
+object UsualState : StateMachineVertex() {
     override fun parseSymbol(symbol: Char, list: MutableList<Token>): StateMachineVertex {
         return when (symbol) {
-            '$'  -> VariableNameParsing(StringBuilder())
+            '$' -> VariableNameParsing(StringBuilder())
             '\'' -> {
                 list.add(CharToken('\''))
-                InsideWeakQuotes()
+                InsideWeakQuotes
             }
-            '"'  -> {
+            '"' -> {
                 list.add(CharToken('"'))
-                InsideDoubleQuotes()
+                InsideDoubleQuotes
             }
             else -> {
                 list.add(CharToken(symbol))
-                UsualState()
+                UsualState
             }
         }
     }
@@ -48,7 +48,7 @@ class UsualState : StateMachineVertex {
 abstract class AnyNameParsing(
     /** Prefix of variable name that was already read */
     protected val writtenSymbols: StringBuilder
-) : StateMachineVertex {
+) : StateMachineVertex() {
 
     /** Symbols that variable name cannot contain */
     protected val badSymbols = listOf(' ', '\t', '\n', '\r', '\'', '"', '|', '=')
@@ -79,12 +79,12 @@ class VariableNameParsing(writtenSymbols: StringBuilder) : AnyNameParsing(writte
             '\'' -> {
                 alreadyRead(list)
                 list.add(CharToken(symbol))
-                InsideWeakQuotes()
+                InsideWeakQuotes
             }
             '"'  -> {
                 alreadyRead(list)
                 list.add(CharToken(symbol))
-                InsideDoubleQuotes()
+                InsideDoubleQuotes
             }
             !in badSymbols -> {
                 writtenSymbols.append(symbol)
@@ -93,7 +93,7 @@ class VariableNameParsing(writtenSymbols: StringBuilder) : AnyNameParsing(writte
             else -> {
                 alreadyRead(list)
                 list.add(CharToken(symbol))
-                UsualState()
+                UsualState
             }
         }
     }
@@ -110,7 +110,7 @@ class VariableNameParsingInsideDoubleQuotes(writtenSymbols: StringBuilder) : Any
             '"' -> {
                 alreadyRead(list)
                 list.add(CharToken('"'))
-                UsualState()
+                UsualState
             }
             !in badSymbols -> {
                 writtenSymbols.append(symbol)
@@ -123,7 +123,7 @@ class VariableNameParsingInsideDoubleQuotes(writtenSymbols: StringBuilder) : Any
             else -> {
                 alreadyRead(list)
                 list.add(CharToken(symbol))
-                InsideDoubleQuotes()
+                InsideDoubleQuotes
             }
         }
     }
@@ -134,16 +134,16 @@ class VariableNameParsingInsideDoubleQuotes(writtenSymbols: StringBuilder) : Any
 }
 
 /** Parsing inside weak quotes */
-class InsideWeakQuotes : StateMachineVertex {
+object InsideWeakQuotes : StateMachineVertex() {
     override fun parseSymbol(symbol: Char, list: MutableList<Token>): StateMachineVertex {
         return when (symbol) {
             '\'' -> {
                 list.add(CharToken('\''))
-                UsualState()
+                UsualState
             }
             else -> {
                 list.add(CharToken(symbol))
-                InsideWeakQuotes()
+                InsideWeakQuotes
             }
         }
     }
@@ -154,18 +154,18 @@ class InsideWeakQuotes : StateMachineVertex {
 }
 
 /** Parsing inside double quotes, but not variable name */
-class InsideDoubleQuotes :
-    StateMachineVertex {
+object InsideDoubleQuotes :
+    StateMachineVertex() {
     override fun parseSymbol(symbol: Char, list: MutableList<Token>): StateMachineVertex {
         return when (symbol) {
             '$' -> VariableNameParsingInsideDoubleQuotes(StringBuilder())
             '"' -> {
                 list.add(CharToken('"'))
-                UsualState()
+                UsualState
             }
             else -> {
                 list.add(CharToken(symbol))
-                InsideDoubleQuotes()
+                InsideDoubleQuotes
             }
         }
     }
