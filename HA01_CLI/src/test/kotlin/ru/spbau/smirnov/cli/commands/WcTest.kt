@@ -19,7 +19,7 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator(),
+            "3 4 ${24 + 3 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator(),
             ""
         )
     }
@@ -41,9 +41,9 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator() +
-                "5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt" + System.lineSeparator() +
-                "8 9 51 total" + System.lineSeparator(),
+            "3 4 ${24 + 3 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator() +
+                "5 5 ${19 + 5 * System.lineSeparator().length} ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt" + System.lineSeparator() +
+                "8 9 ${43 + 8 * System.lineSeparator().length} total" + System.lineSeparator(),
             ""
         )
     }

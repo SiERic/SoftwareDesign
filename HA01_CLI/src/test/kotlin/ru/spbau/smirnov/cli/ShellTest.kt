@@ -43,7 +43,8 @@ class ShellTest {
             "FILE=${resourcesDir}example.txt" + System.lineSeparator() +
                     "cat \$FILE" + System.lineSeparator() +
                     "exit" + System.lineSeparator(),
-            "> > Some example text\n> "
+            "> > Some example text" + System.lineSeparator() +
+                    "> "
         )
     }
 
@@ -53,7 +54,7 @@ class ShellTest {
             "FILE=${resourcesDir}example.txt" + System.lineSeparator() +
                     "cat \$FILE | wc" + System.lineSeparator() +
                     "exit" + System.lineSeparator(),
-            "> > 1 3 18" + System.lineSeparator() +
+            "> > 1 3 ${17 + System.lineSeparator().length}" + System.lineSeparator() +
                     "> "
         )
     }
