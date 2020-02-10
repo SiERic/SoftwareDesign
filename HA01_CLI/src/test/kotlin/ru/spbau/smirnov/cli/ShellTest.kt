@@ -1,6 +1,7 @@
 package ru.spbau.smirnov.cli
 
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -9,6 +10,14 @@ import java.io.PrintStream
 
 class ShellTest {
     private val resourcesDir = "src" + File.separator + "test" + File.separator + "resources" + File.separator
+
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
 
     @Test
     fun `Should start and exit shell`() {

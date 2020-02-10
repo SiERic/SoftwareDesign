@@ -1,8 +1,18 @@
 package ru.spbau.smirnov.cli.commands
 
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import ru.spbau.smirnov.cli.fillFiles
 
 class CatTest {
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
+
     @Test
     fun `Should print file content`() {
         val cat = Cat(listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))

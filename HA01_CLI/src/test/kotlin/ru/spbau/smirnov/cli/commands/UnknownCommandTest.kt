@@ -1,9 +1,19 @@
 package ru.spbau.smirnov.cli.commands
 
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
+import ru.spbau.smirnov.cli.fillFiles
 
 class UnknownCommandTest {
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
+
     @Test
     fun `Should run sort command`() {
         val command = UnknownCommand(Environment(), "sort",
