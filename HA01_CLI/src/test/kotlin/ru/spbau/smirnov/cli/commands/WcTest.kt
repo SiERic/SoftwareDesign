@@ -9,7 +9,9 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt\n",
+            """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
+                |
+            """.trimMargin(),
             ""
         )
     }
@@ -20,7 +22,9 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            "0 2 10\n",
+            """0 2 10
+                |
+            """.trimMargin(),
             ""
         )
     }
@@ -31,9 +35,10 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc, "some input",
             """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
-            |5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt
-            |8 9 51 total
-            |""".trimMargin(), ""
+                |5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt
+                |8 9 51 total
+                |
+            """.trimMargin(), ""
         )
     }
 

@@ -17,7 +17,7 @@ class Pwd(private val environment: Environment, arguments: List<String>) : Execu
             DataOutputStream(streams.outputStream)
                 .writeBytes(environment.currentDirectory + "\n")
         } catch(e: IOException) {
-            streams.errorStream.println("Error in pwd.\n${e.message}")
+            streams.errorStream.println("Error in pwd.${System.lineSeparator()}${e.message}")
             return 1
         }
         return 0

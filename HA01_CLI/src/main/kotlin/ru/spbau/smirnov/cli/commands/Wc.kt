@@ -16,9 +16,9 @@ class Wc(arguments: List<String>) : Executable(arguments) {
         if (arguments.isEmpty()) {
             try {
                 val (newlines, words, bytes) = calculateFile(streams.inputStream)
-                output.writeBytes("$newlines $words $bytes\n")
+                output.writeBytes("$newlines $words $bytes${System.lineSeparator()}")
             } catch (e: IOException) {
-                streams.errorStream.println("Error in wc while reading from inputStream\n${e.message}")
+                streams.errorStream.println("Error in wc while reading from inputStream${System.lineSeparator()}${e.message}")
                 return 1
             }
         } else {
@@ -30,7 +30,7 @@ class Wc(arguments: List<String>) : Executable(arguments) {
                 try {
                     FileInputStream(filename).use {
                         val (newlines, words, bytes) = calculateFile(it)
-                        output.writeBytes("$newlines $words $bytes $filename\n")
+                        output.writeBytes("$newlines $words $bytes $filename${System.lineSeparator()}")
 
                         totalNewlines += newlines
                         totalWords += words
@@ -43,9 +43,9 @@ class Wc(arguments: List<String>) : Executable(arguments) {
             }
             if (arguments.size > 1) {
                 try {
-                    output.writeBytes("$totalNewlines $totalWords $totalBytes total\n")
+                    output.writeBytes("$totalNewlines $totalWords $totalBytes total${System.lineSeparator()}")
                 } catch(e: IOException) {
-                    streams.errorStream.println("Error in wc.\n${e.message}")
+                    streams.errorStream.println("Error in wc.${System.lineSeparator()}${e.message}")
                 }
             }
         }

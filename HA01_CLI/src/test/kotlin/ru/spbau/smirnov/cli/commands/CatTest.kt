@@ -9,7 +9,12 @@ class CatTest {
         CommandTestUtils.runExecutorTest(
             cat,
             "",
-            "some\ncontent\nis\nhere\n42\n",
+            """some
+                |content
+                |is
+                |here
+                |42
+                |""".trimMargin(),
             ""
         )
     }
@@ -31,7 +36,12 @@ class CatTest {
         CommandTestUtils.runExecutorTest(
             cat,
             "someInput",
-            "some\ncontent\nis\nhere\n42\n",
+            """some
+                |content
+                |is
+                |here
+                |42
+                |""".trimMargin(),
             ""
         )
     }
@@ -40,7 +50,8 @@ class CatTest {
     fun `Should concatenate two files passed as arguments`() {
         val cat = Cat(listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt", CommandTestUtils.resourcesDir + "AnotherFile.txt"))
         CommandTestUtils.runExecutorTest(
-            cat, "someInput",
+            cat,
+            "someInput",
             """some
               |content
               |is

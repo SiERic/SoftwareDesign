@@ -16,7 +16,7 @@ class ExecutorTest {
             listOf(
                 Echo(listOf("42", "17"))
             ),
-            "42 17\n",
+            "42 17${System.lineSeparator()}",
             0
         )
     }
@@ -39,7 +39,7 @@ class ExecutorTest {
                 Cat(listOf()),
                 Cat(listOf())
             ),
-            "42 17\n",
+            "42 17${System.lineSeparator()}",
             0
         )
     }
@@ -53,7 +53,7 @@ class ExecutorTest {
                 Cat(listOf()),
                 Cat(listOf())
             ),
-            "42 17\n",
+            "42 17${System.lineSeparator()}",
             0
         )
     }
