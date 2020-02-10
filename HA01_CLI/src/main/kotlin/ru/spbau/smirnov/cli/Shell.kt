@@ -46,14 +46,14 @@ class Shell {
             try {
                 substitutedInput = substitute.doSubstitution(input)
             } catch (e: SubstitutionParserException) {
-                errorStream.println("Preparsing error!\n${e.message}")
+                errorStream.println("Preparsing error!${System.lineSeparator()}${e.message}")
                 continue
             }
 
             try {
                 parsedInput = parser.parse(substitutedInput)
             } catch (e: ParserException) {
-                errorStream.println("Parsing error!\n${e.message}")
+                errorStream.println("Parsing error!${System.lineSeparator()}${e.message}")
                 continue
             }
 

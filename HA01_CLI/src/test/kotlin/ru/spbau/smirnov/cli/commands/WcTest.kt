@@ -9,9 +9,7 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
-                |
-            """.trimMargin(),
+            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator(),
             ""
         )
     }
@@ -22,9 +20,7 @@ class WcTest {
         CommandTestUtils.runExecutorTest(
             wc,
             "some input",
-            """0 2 10
-                |
-            """.trimMargin(),
+            "0 2 10" + System.lineSeparator(),
             ""
         )
     }
@@ -33,12 +29,12 @@ class WcTest {
     fun `Should calculate total on two files`() {
         val wc = Wc(listOf(CommandTestUtils.resourcesDir + "AnotherFile.txt", CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
         CommandTestUtils.runExecutorTest(
-            wc, "some input",
-            """3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt
-                |5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt
-                |8 9 51 total
-                |
-            """.trimMargin(), ""
+            wc,
+            "some input",
+            "3 4 27 ${CommandTestUtils.resourcesDir}AnotherFile.txt" + System.lineSeparator() +
+                "5 5 24 ${CommandTestUtils.resourcesDir}JustAFileWithSomeContent.txt" + System.lineSeparator() +
+                "8 9 51 total" + System.lineSeparator(),
+            ""
         )
     }
 

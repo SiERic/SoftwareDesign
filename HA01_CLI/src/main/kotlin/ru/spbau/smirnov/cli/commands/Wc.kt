@@ -52,10 +52,24 @@ class Wc(arguments: List<String>) : Executable(arguments) {
         return 0
     }
 
+    private fun countNewlines(string: String): Int {
+        val lineSeparatorLength = System.lineSeparator().length
+        var lastIndex = -lineSeparatorLength
+        var ctr = 0
+        while (true) {
+            lastIndex = string.indexOf(System.lineSeparator(), lastIndex + lineSeparatorLength)
+            if (lastIndex == -1) {
+                break
+            }
+            ctr++
+        }
+        return ctr
+    }
+
     private fun calculateFile(inputStream: InputStream): Triple<Int, Int, Int> {
         val bytes = DataInputStream(inputStream).readBytes()
         val string = String(bytes)
-        val newlines = string.count { it.toString() == System.lineSeparator() }
+        val newlines = countNewlines(string)
         val words = string.split(' ', '\t', '\n').count { it.isNotEmpty() }
         return Triple(newlines, words, bytes.size)
     }
