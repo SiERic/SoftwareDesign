@@ -66,7 +66,7 @@ internal class GrepTest {
         CommandTestUtils.runExecutorTest(
             grep,
             "input",
-            "content\n",
+            "content" + System.lineSeparator(),
             ""
         )
     }
