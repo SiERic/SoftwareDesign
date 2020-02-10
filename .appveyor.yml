@@ -3,8 +3,8 @@ environment:
 install:
   - java -version
 build_script:
-  - gradlew.bat -u -i -S --no-daemon build
+  - cd HA01_CLI && gradlew.bat -u -i -S --no-daemon build
 test_script:
-  - gradlew.bat -u -i -S --no-daemon check
+  - cd HA01_CLI && gradlew.bat -u -i -S --no-daemon check
 cache:
   - C:\Users\appveyor\.gradle
