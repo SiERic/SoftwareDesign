@@ -25,10 +25,10 @@ internal class GrepUsageFormatter(
         mainLine.append(indent)
             .append("Usage: ")
             .append(programName)
-            .append(" [OPTION]... PATTERN [FILE]...\n")
+            .append(" [OPTION]... PATTERN [FILE]...${System.lineSeparator()}")
             .append("Searches for PATTERN in each FILE")
 
         wrapDescription(out, indentCount, mainLine.toString())
-        out!!.append("\n")
+        out!!.append(System.lineSeparator())
     }
 }

@@ -23,7 +23,7 @@ class Grep(arguments: List<String>) : Executable(arguments) {
         try {
             parseArguments()
         } catch (e: GrepParserException) {
-            streams.errorStream.println(e.message + "\n" + grepArguments.usage)
+            streams.errorStream.println(e.message + System.lineSeparator() + grepArguments.usage)
             return 1
         }
 
@@ -68,7 +68,7 @@ class Grep(arguments: List<String>) : Executable(arguments) {
                 prefixNotMatch
             )
         } catch(e: IOException) {
-            streams.errorStream.println("Error in grep while reading from file $filename\n${e.message}")
+            streams.errorStream.println("Error in grep while reading from file $filename${System.lineSeparator()}${e.message}")
             return 1
         }
         return 0
@@ -78,7 +78,7 @@ class Grep(arguments: List<String>) : Executable(arguments) {
         try {
             executeOnInputStream(streams.inputStream, DataOutputStream(streams.outputStream))
         } catch (e: IOException) {
-            streams.errorStream.println("Error in grep while reading from input stream\n${e.message}")
+            streams.errorStream.println("Error in grep while reading from input stream${System.lineSeparator()}${e.message}")
             return 1
         }
         return 0
@@ -93,10 +93,10 @@ class Grep(arguments: List<String>) : Executable(arguments) {
 
         for (line in reader.readLines()) {
             if (pattern.matcher(line).find()) {
-                outputStream.writeBytes("$prefixMatch$line\n")
+                outputStream.writeBytes("$prefixMatch$line${System.lineSeparator()}")
                 remainsToPrint = grepArguments.outputLines
             } else if (remainsToPrint > 0) {
-                outputStream.writeBytes("$prefixNotMatch$line\n")
+                outputStream.writeBytes("$prefixNotMatch$line${System.lineSeparator()}")
                 remainsToPrint--
             }
         }

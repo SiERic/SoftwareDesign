@@ -1,9 +1,20 @@
 package ru.spbau.smirnov.cli.commands.grep
 
+import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.commands.CommandTestUtils
+import ru.spbau.smirnov.cli.fillFiles
 
 internal class GrepTest {
+    companion object {
+        @BeforeAll
+        @JvmStatic
+        fun initFiles() {
+            fillFiles()
+        }
+    }
+
+
     @Test
     fun `Should work on simple test (file input)`() {
         val grep = Grep(
@@ -16,10 +27,9 @@ internal class GrepTest {
         CommandTestUtils.runExecutorTest(
             grep,
             "someInput",
-            """some
-                |content
-                |here
-                |""".trimMargin(),
+            "some" + System.lineSeparator() +
+                "content" + System.lineSeparator() +
+                "here" + System.lineSeparator(),
             ""
         )
     }
@@ -34,13 +44,11 @@ internal class GrepTest {
 
         CommandTestUtils.runExecutorTest(
             grep,
-            """42 is a number
-                |it is not prime
-                |but 42 is cool
-                |""".trimMargin(),
-            """42 is a number
-                |but 42 is cool
-                |""".trimMargin(),
+            "42 is a number" + System.lineSeparator() +
+                "it is not prime" + System.lineSeparator() +
+                "but 42 is cool" + System.lineSeparator(),
+            "42 is a number" + System.lineSeparator() +
+                "but 42 is cool" + System.lineSeparator(),
             ""
         )
     }
@@ -94,11 +102,10 @@ internal class GrepTest {
         CommandTestUtils.runExecutorTest(
             grep,
             "input",
-            """some
-                |content
-                |is
-                |here
-                |""".trimMargin(),
+            "some" + System.lineSeparator() +
+                "content" + System.lineSeparator() +
+                "is" + System.lineSeparator() +
+                "here" + System.lineSeparator(),
             ""
         )
     }
@@ -115,7 +122,7 @@ internal class GrepTest {
         CommandTestUtils.runExecutorTest(
             grep,
             "input",
-            "content\n",
+            "content" + System.lineSeparator(),
             ""
         )
     }
@@ -131,14 +138,12 @@ internal class GrepTest {
 
         CommandTestUtils.runExecutorTest(
             grep,
-            """prefixce42t
-                |some str c ey 4242 42 est 42
-                |\\ce4t{
-                |certsuffix
-                |""".trimMargin(),
-            """some str c ey 4242 42 est 42
-                |\\ce4t{
-                |""".trimMargin(),
+            "prefixce42t" + System.lineSeparator() +
+                "some str c ey 4242 42 est 42" + System.lineSeparator() +
+                "\\ce4t{" + System.lineSeparator() +
+                "certsuffix" + System.lineSeparator(),
+            "some str c ey 4242 42 est 42" + System.lineSeparator() +
+                "\\ce4t{" + System.lineSeparator(),
             ""
         )
     }
@@ -162,10 +167,9 @@ internal class GrepTest {
         CommandTestUtils.runExecutorTest(
             grep,
             "input",
-            """$firstFileName:content
-                |$firstFileName-is
-                |$secondFileName:Content
-                |""".trimMargin(),
+            "$firstFileName:content" + System.lineSeparator() +
+                "$firstFileName-is" + System.lineSeparator() +
+                "$secondFileName:Content" + System.lineSeparator(),
             ""
         )
     }
