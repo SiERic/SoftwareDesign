@@ -46,7 +46,7 @@ class CdTest {
     @Test
     fun `Should print error if argument is not a directory`() {
         CommandTestUtils.runExecutorTest(
-            Cd(Environment(), listOf("test" + File.separator + "resources" + File.separator + "example.txt")),
+            Cd(Environment(), listOf("src" + File.separator + "test" + File.separator + "resources" + File.separator + "example.txt")),
             "some useless input",
             "",
             "Some error"
