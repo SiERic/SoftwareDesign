@@ -12,7 +12,7 @@ class Environment {
     private val variableToValue = mutableMapOf<String, String>().apply { putAll(System.getenv()) }
 
     /** Returns current directory as a string */
-    val currentDirectory: String = Paths.get("").toAbsolutePath().toString()
+    var currentDirectory: String = Paths.get("").toAbsolutePath().toString()
 
     /**
      * Sets environmental variables of a new process to current environmental variables
