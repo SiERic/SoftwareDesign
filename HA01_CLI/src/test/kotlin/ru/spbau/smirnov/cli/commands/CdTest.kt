@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
 import java.nio.file.Paths
 import org.junit.jupiter.api.Assertions.assertEquals
+import java.io.File
 
 class CdTest {
     @Test
@@ -24,7 +25,7 @@ class CdTest {
         val expectedNewCurrentDirectory = Paths.get("", "src", "main", "kotlin").toAbsolutePath().toString()
         val environment = Environment()
         CommandTestUtils.runExecutorTest(
-            Cd(environment, listOf("src/main/kotlin")),
+            Cd(environment, listOf("src" + File.separator + "main" + File.separator + "kotlin")),
             "some useless input",
             System.lineSeparator(),
             ""
@@ -45,7 +46,7 @@ class CdTest {
     @Test
     fun `Should print error if argument is not a directory`() {
         CommandTestUtils.runExecutorTest(
-            Cd(Environment(), listOf("test/resources/example.txt")),
+            Cd(Environment(), listOf("test" + File.separator + "resources" + File.separator + "example.txt")),
             "some useless input",
             "",
             "Some error"
@@ -87,6 +88,25 @@ class CdTest {
         )
         CommandTestUtils.runExecutorTest(
             Cd(environment, listOf("..")),
+            "some useless input",
+            System.lineSeparator(),
+            ""
+        )
+        assertEquals(expectedNewCurrentDirectory, environment.currentDirectory)
+    }
+
+    @Test
+    fun `Should go in the cousin folder`() {
+        val expectedNewCurrentDirectory = Paths.get("", "src", "test").toAbsolutePath().toString()
+        val environment = Environment()
+        CommandTestUtils.runExecutorTest(
+            Cd(environment, listOf("src" + File.separator + "main")),
+            "some useless input",
+            System.lineSeparator(),
+            ""
+        )
+        CommandTestUtils.runExecutorTest(
+            Cd(environment, listOf(".." + File.separator + "test")),
             "some useless input",
             System.lineSeparator(),
             ""
