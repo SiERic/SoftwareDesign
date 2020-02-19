@@ -7,6 +7,12 @@ import java.io.File
 import java.io.IOException
 import java.nio.file.Paths
 
+/**
+ * Ls command.
+ *
+ * List all files in the directory.
+ * If no arguments, lists files in current working directory, else in the given one.
+ */
 class Ls(private val environment: Environment, arguments: List<String>) : Executable(arguments) {
     override fun execute(streams: Streams): Int {
         if (arguments.size > 1) {

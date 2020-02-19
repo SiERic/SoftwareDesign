@@ -6,6 +6,13 @@ import java.io.DataOutputStream
 import java.io.IOException
 import java.nio.file.Paths
 
+/**
+ * Cd command.
+ *
+ * Changes the current working directory.
+ * With no arguments goes to home directory, else to the given one.
+ * Ignores input stream.
+ */
 class Cd(private val environment: Environment, arguments: List<String>) : Executable(arguments) {
     override fun execute(streams: Streams): Int {
         if (arguments.size > 1) {
