@@ -14,10 +14,10 @@ class Ls(private val environment: Environment, arguments: List<String>) : Execut
             return 1
         }
         if (arguments.isEmpty()) {
-            return ls(Paths.get(environment.currentDirectory, "").toAbsolutePath().normalize().toFile(), streams)
+            return ls(Paths.get(environment.currentDirectory, "").toAbsolutePath().toFile(), streams)
         }
         if (arguments.size == 1) {
-            return ls(Paths.get(environment.currentDirectory, arguments[0]).toAbsolutePath().normalize().toFile(), streams)
+            return ls(Paths.get(environment.currentDirectory, arguments[0]).toAbsolutePath().toFile(), streams)
         }
         return 0
     }
@@ -26,6 +26,17 @@ class Ls(private val environment: Environment, arguments: List<String>) : Execut
         if (!file.exists()) {
             streams.errorStream.println("Error in ls. No such file or directory")
             return 1
+        }
+        if (!file.isDirectory) {
+            try {
+                DataOutputStream(streams.outputStream).writeBytes(
+                    file.name + System.lineSeparator()
+                )
+            } catch (e : IOException) {
+                streams.errorStream.println("Error in ls${System.lineSeparator()}${e.message}")
+                return 1
+            }
+            return 0
         }
         try {
             DataOutputStream(streams.outputStream).writeBytes(
