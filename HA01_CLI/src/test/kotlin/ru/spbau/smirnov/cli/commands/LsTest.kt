@@ -45,7 +45,7 @@ class LsTest() {
 
     @Test
     fun `Should list directory files with no args`() {
-        var environment = Environment()
+        val environment = Environment()
         CommandTestUtils.runExecutorTest(
             Cd(environment, listOf(pathToLsFolder)),
             "some useless input",

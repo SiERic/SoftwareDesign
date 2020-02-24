@@ -2,6 +2,7 @@ package ru.spbau.smirnov.cli.commands
 
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import ru.spbau.smirnov.cli.Environment
 import ru.spbau.smirnov.cli.fillFiles
 
 class CatTest {
@@ -15,7 +16,7 @@ class CatTest {
 
     @Test
     fun `Should print file content`() {
-        val cat = Cat(listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
+        val cat = Cat(Environment(), listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
         CommandTestUtils.runExecutorTest(
             cat,
             "",
@@ -30,7 +31,7 @@ class CatTest {
 
     @Test
     fun `Should print input if no arguments`() {
-        val cat = Cat(listOf())
+        val cat = Cat(Environment(), listOf())
         CommandTestUtils.runExecutorTest(
             cat,
             "some input",
@@ -41,7 +42,7 @@ class CatTest {
 
     @Test
     fun `Should print file content even if input stream is not empty`() {
-        val cat = Cat(listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
+        val cat = Cat(Environment(), listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt"))
         CommandTestUtils.runExecutorTest(
             cat,
             "someInput",
@@ -56,7 +57,7 @@ class CatTest {
 
     @Test
     fun `Should concatenate two files passed as arguments`() {
-        val cat = Cat(listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt", CommandTestUtils.resourcesDir + "AnotherFile.txt"))
+        val cat = Cat(Environment(), listOf(CommandTestUtils.resourcesDir + "JustAFileWithSomeContent.txt", CommandTestUtils.resourcesDir + "AnotherFile.txt"))
         CommandTestUtils.runExecutorTest(
             cat,
             "someInput",
@@ -74,7 +75,7 @@ class CatTest {
 
     @Test
     fun `Should print error if cannot find file`() {
-        val cat = Cat(listOf("a"))
+        val cat = Cat(Environment(), listOf("a"))
         CommandTestUtils.runExecutorTest(cat, "", "", "Some error")
     }
 }

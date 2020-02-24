@@ -113,4 +113,42 @@ class CdTest {
         )
         assertEquals(expectedNewCurrentDirectory, environment.currentDirectory)
     }
+
+    @Test
+    fun `Should correctly work with pwd`() {
+        val pathToTestFolder = Paths.get("", "src", "test", "resources").toString()
+        val environment = Environment()
+        CommandTestUtils.runExecutorTest(
+            Cd(environment, listOf(pathToTestFolder)),
+            "some useless input",
+            System.lineSeparator(),
+            ""
+        )
+        val absolutePathToTestFolder = Paths.get("", "src", "test", "resources").toAbsolutePath().toString()
+
+        CommandTestUtils.runExecutorTest(
+            Pwd(environment, listOf()),
+            "some useless input",
+            absolutePathToTestFolder + System.lineSeparator(),
+            ""
+        )
+    }
+
+    @Test
+    fun `Should correctly work with cat`() {
+        val pathToTestFolder = Paths.get("", "src", "test", "resources").toString()
+        val environment = Environment()
+        CommandTestUtils.runExecutorTest(
+            Cd(environment, listOf(pathToTestFolder)),
+            "some useless input",
+            System.lineSeparator(),
+            ""
+        )
+        CommandTestUtils.runExecutorTest(
+            Cat(environment, listOf("example.txt")),
+            "some useless input",
+            "Some example text" + System.lineSeparator(),
+            ""
+        )
+    }
 }

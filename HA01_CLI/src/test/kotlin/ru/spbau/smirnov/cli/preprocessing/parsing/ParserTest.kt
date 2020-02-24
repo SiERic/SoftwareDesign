@@ -21,7 +21,7 @@ class ParserTest {
 
     @Test
     fun `Should parse single command without parameters`() {
-        val cat = Cat(listOf())
+        val cat = Cat(Environment(), listOf())
         assertEquals(listOf<Executable>(cat), parser.parse("cat"))
     }
 
