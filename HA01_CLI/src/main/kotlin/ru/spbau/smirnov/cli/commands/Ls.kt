@@ -36,7 +36,7 @@ class Ls(private val environment: Environment, arguments: List<String>) : Execut
         if (!file.isDirectory) {
             try {
                 DataOutputStream(streams.outputStream).writeBytes(
-                    file.name + System.lineSeparator()
+                    toColoredPath(file) + System.lineSeparator()
                 )
             } catch (e : IOException) {
                 streams.errorStream.println("Error in ls${System.lineSeparator()}${e.message}")

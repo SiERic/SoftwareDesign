@@ -3,13 +3,14 @@ package ru.spbau.smirnov.cli.commands
 import org.junit.jupiter.api.Test
 import ru.spbau.smirnov.cli.Environment
 import java.io.File
+import java.nio.file.Files
 import java.nio.file.Paths
 
 class LsTest() {
 
-    val pathToLsFolder = Paths.get("", "src", "test", "resources", "ls").toString()
-    val ANSI_RESET = "\u001B[0m"
-    val ANSI_BLUE = "\u001B[34m"
+    private val pathToLsFolder = Paths.get("", "src", "test", "resources", "ls").toString()
+    private val ANSI_RESET = "\u001B[0m"
+    private val ANSI_BLUE = "\u001B[34m"
 
     @Test
     fun `Should list directory files`() {
@@ -35,12 +36,14 @@ class LsTest() {
 
     @Test
     fun `Should list empty folder files`() {
+        Files.createDirectory(Paths.get(pathToLsFolder, "heh", "wow"))
         CommandTestUtils.runExecutorTest(
-            Ls(Environment(), listOf(pathToLsFolder + File.separator + "heh")),
+            Ls(Environment(), listOf(pathToLsFolder + File.separator + "heh" + File.separator + "wow")),
             "some useless input",
             System.lineSeparator(),
             ""
         )
+        Files.deleteIfExists(Paths.get(pathToLsFolder, "heh", "wow"))
     }
 
     @Test
