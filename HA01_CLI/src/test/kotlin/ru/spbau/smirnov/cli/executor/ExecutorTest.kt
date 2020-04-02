@@ -1,24 +1,16 @@
 package ru.spbau.smirnov.cli.executor
 
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
+import ru.spbau.smirnov.cli.Environment
 import ru.spbau.smirnov.cli.Shell
 import ru.spbau.smirnov.cli.commands.Cat
 import ru.spbau.smirnov.cli.commands.Echo
 import ru.spbau.smirnov.cli.commands.Executable
 import ru.spbau.smirnov.cli.commands.Exit
-import ru.spbau.smirnov.cli.fillFiles
 import java.io.*
 
 class ExecutorTest {
-    companion object {
-        @BeforeAll
-        @JvmStatic
-        fun initFiles() {
-            fillFiles()
-        }
-    }
 
     @Test
     fun `Should execute one command`() {
@@ -46,8 +38,8 @@ class ExecutorTest {
         testExecutor(
             listOf(
                 Echo(listOf("42", "17")),
-                Cat(listOf()),
-                Cat(listOf())
+                Cat(Environment(), listOf()),
+                Cat(Environment(), listOf())
             ),
             "42 17${System.lineSeparator()}",
             0
@@ -60,8 +52,8 @@ class ExecutorTest {
             listOf(
                 Exit(Shell(), listOf()),
                 Echo(listOf("42", "17")),
-                Cat(listOf()),
-                Cat(listOf())
+                Cat(Environment(), listOf()),
+                Cat(Environment(), listOf())
             ),
             "42 17${System.lineSeparator()}",
             0
@@ -72,7 +64,7 @@ class ExecutorTest {
     fun `Should fail at first error`() {
         testExecutor(
             listOf(
-                Cat(listOf("fileThatDoesNotExist.txt")),
+                Cat(Environment(), listOf("fileThatDoesNotExist.txt")),
                 Echo(listOf("42", "17"))
             ),
             "",

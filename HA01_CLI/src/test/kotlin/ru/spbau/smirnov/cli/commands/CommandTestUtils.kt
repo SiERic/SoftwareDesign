@@ -27,4 +27,15 @@ object CommandTestUtils {
         // so just check that error exists or not
         assertTrue(String(processErrorStream.toByteArray()).isNotEmpty() == expectedErrors.isNotEmpty())
     }
+
+    fun runExecutorTestAndReturnCommandOutput(command: Executable, input: String) : String {
+        val processInputStream = ByteArrayInputStream(input.toByteArray())
+        val processOutputStream = ByteArrayOutputStream()
+        val processErrorStream = ByteArrayOutputStream()
+
+        val streams = Streams(processInputStream, processOutputStream, PrintStream(processErrorStream))
+        command.execute(streams)
+        assertTrue(String(processErrorStream.toByteArray()).isEmpty())
+        return String(processOutputStream.toByteArray())
+    }
 }
