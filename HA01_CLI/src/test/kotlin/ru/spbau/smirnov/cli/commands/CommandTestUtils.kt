@@ -35,7 +35,7 @@ object CommandTestUtils {
 
         val streams = Streams(processInputStream, processOutputStream, PrintStream(processErrorStream))
         command.execute(streams)
-//        assertTrue(String(processErrorStream.toByteArray()).isEmpty())
+        assertTrue(String(processErrorStream.toByteArray()).isEmpty())
         return String(processOutputStream.toByteArray())
     }
 }
