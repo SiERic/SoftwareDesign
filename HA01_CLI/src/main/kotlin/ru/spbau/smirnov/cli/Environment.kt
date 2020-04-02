@@ -21,6 +21,7 @@ class Environment {
         val processEnvironment = processBuilder.environment()
         processEnvironment.clear()
         processEnvironment.putAll(variableToValue)
+        processBuilder.directory(Paths.get(currentDirectory).toAbsolutePath().toFile());
     }
 
     /**
