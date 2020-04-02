@@ -5,6 +5,7 @@ import ru.spbau.smirnov.cli.Environment
 import java.nio.file.Paths
 import org.junit.jupiter.api.Assertions.assertEquals
 import java.io.File
+import java.nio.file.Files
 
 class CdTest {
     @Test
@@ -150,5 +151,25 @@ class CdTest {
             "Some example text" + System.lineSeparator(),
             ""
         )
+    }
+
+    @Test
+    fun `Should correctly work with external command`() {
+        val pathToTestFolder = Paths.get("", "src", "test", "resources").toString()
+        val environment = Environment()
+        CommandTestUtils.runExecutorTest(
+            Cd(environment, listOf(pathToTestFolder)),
+            "some useless input",
+            System.lineSeparator(),
+            ""
+        )
+        Files.createFile(Paths.get(pathToTestFolder, "kek"))
+        val output = CommandTestUtils.runExecutorTestAndReturnCommandOutput(
+            UnknownCommand(environment, "git", listOf("status")),
+            ""
+        )
+        assert(output.indexOf("kek") != -1)
+        assert(output.indexOf("resources" + File.separator + "kek") == -1)
+        Files.deleteIfExists(Paths.get(pathToTestFolder, "kek"))
     }
 }
